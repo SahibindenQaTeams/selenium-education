@@ -1,5 +1,8 @@
 package com;
 
+import logs.LogsTest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +16,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class TestSahibinden {
 
+  private static final Logger logger = LogManager.getLogger(TestSahibinden.class);
+
   ChromeDriver driver;
 
   @BeforeEach
@@ -24,13 +29,15 @@ public class TestSahibinden {
     capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
     chromeOptions.merge(capabilities);
     driver = new ChromeDriver(chromeOptions);
-    System.out.println("ChromeDriver oluşturuldu.");
+    logger.info("ChromeDriver oluşturuldu.");
+    //System.out.println("ChromeDriver oluşturuldu.");
   }
 
   @AfterEach
   public void afterEach() {
     driver.quit();
-    System.out.println("ChromeDriver kapandı.");
+    //System.out.println("ChromeDriver kapandı.");
+    logger.info("ChromeDriver kapandı.");
   }
 
   @Test
@@ -59,7 +66,9 @@ public class TestSahibinden {
   public void parameterizedTest2(String email, String password, String errorMessage)
       throws InterruptedException {
 
-    System.out.println("Error Message -> " + errorMessage);
+    logger.info("Error Message " + errorMessage);
+
+    //System.out.println("Error Message -> " + errorMessage);
 
     driver.get("https://secure.sahibinden.com/giris");
 
